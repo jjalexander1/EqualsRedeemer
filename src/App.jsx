@@ -7,23 +7,23 @@ function App() {
   const projects = [
     {
       title: 'Highlight Translator',
-      synopsis: 'A published Chrome Extension for translating highlighted text.',
-      url: 'https://github.com/jjalexander1/HighlightTranslator'
+      synopsis: 'A published Chrome Extension for translating highlighted text instantly.',
+      url: 'https://chromewebstore.google.com/detail/highlight-translator/cjlajekojgiipcikahogchndkbmiekon?pli=1'
     },
     {
-      title: 'Quiz Buzzer',
-      synopsis: 'A Flask-SocketIO application for hosting Quiz buzzer rooms. (Currently not deployed)',
-      url: 'https://github.com/jjalexander1/friday-buzzer'
+      title: 'Fast Quiz',
+      synopsis: 'A real-time trivia application for hosting fast-paced quizzes with live scoreboards.',
+      url: 'https://fastquiz.localhost'
+    },
+    {
+      title: 'Friday Buzzer',
+      synopsis: 'A websocket-based buzzer system for hosting quiz rooms and tracking response times.',
+      url: 'https://fridaybuzzer.localhost'
     },
     {
       title: 'QLL Website Remake',
-      synopsis: 'A community project I started to rewrite the QLL website with modern technology.',
-      url: 'https://github.com/jjalexander1/QLLWebsiteRemake'
-    },
-    {
-      title: 'More to Come',
-      synopsis: 'I am constantly building and learning. Check back soon for new projects.',
-      url: 'https://github.com/jjalexander1'
+      synopsis: 'A modern, full-stack remake of the Quiz League of London website using React and Python.',
+      url: 'https://qll.localhost'
     }
   ];
 
