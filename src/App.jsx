@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import './index.css'
 
 function App() {
@@ -7,23 +7,31 @@ function App() {
   const projects = [
     {
       title: 'Highlight Translator',
-      synopsis: 'A published Chrome Extension for translating highlighted text instantly.',
-      url: 'https://chromewebstore.google.com/detail/highlight-translator/cjlajekojgiipcikahogchndkbmiekon?pli=1'
+      synopsis: 'Chrome extension for instant highlighted-text translation.',
+      url: 'https://chromewebstore.google.com/detail/highlight-translator/cjlajekojgiipcikahogchndkbmiekon?pli=1',
+      category: 'Chrome Extension',
+      accent: 'publish'
     },
     {
       title: 'Fast Quiz',
-      synopsis: 'A real-time trivia application for hosting fast-paced quizzes with live scoreboards.',
-      url: 'https://fastquiz.localhost'
+      synopsis: 'Live quiz hosting with realtime rounds and scoreboards.',
+      url: 'https://fastquiz.equalsredeemer.com',
+      category: 'WebSocket App',
+      accent: 'realtime'
     },
     {
-      title: 'Friday Buzzer',
-      synopsis: 'A websocket-based buzzer system for hosting quiz rooms and tracking response times.',
-      url: 'https://fridaybuzzer.localhost'
+      title: 'Buzzer',
+      synopsis: 'WebSocket buzzer rooms with response timing for quiz nights.',
+      url: 'https://buzzer.equalsredeemer.com',
+      category: 'WebSocket App',
+      accent: 'quiz'
     },
     {
-      title: 'QLL Website Remake',
-      synopsis: 'A modern, full-stack remake of the Quiz League of London website using React and Python.',
-      url: 'https://qll.localhost'
+      title: 'Quiz League of London website',
+      synopsis: 'Full rewrite of the historic Quiz League of London website and stats platform, coming soon.',
+      url: 'https://quizleague.london',
+      category: 'Website Rewrite',
+      accent: 'publish'
     }
   ];
 
@@ -39,7 +47,10 @@ function App() {
       {/* Hero Section */}
       <section className="hero-section">
         <h1 className="typing-container" id="title">=REDEEMER</h1>
-        <h2 id="subtitle">Jack Alexander, Senior Software Engineer</h2>
+        <div className="hero-identity">
+          <p className="hero-name">Jack Alexander</p>
+          <h2 id="subtitle" className="hero-role">Senior Software Engineer</h2>
+        </div>
 
         <div className="content">
           <div className="social-links">
@@ -61,6 +72,10 @@ function App() {
 
       {/* Projects Section */}
       <section className="projects-section" ref={projectsRef}>
+        <div className="projects-header">
+          <h2 className="projects-title">Things I’ve Built</h2>
+          <p className="projects-intro">Web apps, sites and tools.</p>
+        </div>
         <div className="projects-grid">
           {projects.map((project, index) => (
             <a
@@ -68,15 +83,20 @@ function App() {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="project-card"
+              className={`project-card project-card-${project.accent}`}
             >
-              <h3>{project.title}</h3>
-              <p>{project.synopsis}</p>
+              <div className="project-card-top">
+                <span className="project-category">{project.category}</span>
+              </div>
+              <div className="project-card-body">
+                <h3>{project.title}</h3>
+                <p>{project.synopsis}</p>
+              </div>
             </a>
           ))}
         </div>
-        <hr className="divider" />
       </section>
+      <div className="rainbow-rail" aria-hidden="true" />
     </>
   )
 }

@@ -25,6 +25,20 @@ body {
   box-sizing: border-box;
 }
 
+.hero-identity {
+  margin-top: 0.8rem;
+  text-align: center;
+}
+
+.hero-name {
+  margin: 0;
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.03rem;
+  text-transform: uppercase;
+}
+
 /* Projects Section */
 .projects-section {
   min-height: 100vh;
@@ -33,66 +47,153 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 2rem;
+  padding: 3.5rem 2rem;
   box-sizing: border-box;
-  background-color: #050505;
-  /* Slightly different shade or just keep black */
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255, 215, 0, 0.08), transparent 45%),
+    radial-gradient(circle at 85% 25%, rgba(255, 255, 255, 0.05), transparent 40%),
+    linear-gradient(180deg, #050505 0%, #020202 100%);
+  position: relative;
 }
 
 .projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
   width: 100%;
-  max-width: 1000px;
-  margin-bottom: 4rem;
+  max-width: 860px;
+  margin-bottom: 0;
 }
 
 @media (min-width: 768px) {
   .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
+    gap: 1.15rem;
   }
+}
+
+.projects-header {
+  width: 100%;
+  max-width: 860px;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.projects-title {
+  margin: 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.projects-intro {
+  margin: 0.75rem 0 0 0;
+  color: #bfbfbf;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  max-width: 60ch;
+  font-size: 0.98rem;
 }
 
 /* Project Cards */
 .project-card {
-  background: #0a0a0a;
-  border: 1px solid #333;
-  padding: 2.5rem;
-  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+    #0a0a0a;
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  padding: 0.8rem 0.95rem;
+  border-radius: 14px;
   text-decoration: none;
   color: #fff;
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: grid;
+  grid-template-columns: minmax(120px, 145px) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.7rem;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 215, 0, 0.08), transparent 45%);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.42);
+  border-color: #FFD700;
+}
+
+.project-card-top,
+.project-card-body {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card-top {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  position: relative;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-  /* Subtle white shadow */
+  gap: 0.35rem;
 }
 
-.project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-  /* Stronger white shadow on hover */
-  border-color: #FFD700;
+.project-category {
+  border: 1px solid rgba(255, 215, 0, 0.22);
+  color: #f4df8e;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-family: 'Arial', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  text-transform: none;
+  background: rgba(255, 215, 0, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.project-card-body {
+  margin: 0;
 }
 
 .project-card h3 {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.8rem;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.38rem;
+  font-weight: 700;
   color: #FFD700;
-  margin: 0 0 1rem 0;
-  text-transform: uppercase;
+  margin: 0 0 0.22rem 0;
+  text-transform: none;
+  line-height: 1.1;
+  letter-spacing: 0.01rem;
 }
 
 .project-card p {
   font-family: 'Arial', sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #ccc;
+  font-size: 1.04rem;
+  line-height: 1.33;
+  color: #cfcfcf;
   margin: 0;
+  max-width: 46ch;
+}
+
+.project-card-realtime::before {
+  background: linear-gradient(115deg, rgba(255, 215, 0, 0.12), rgba(255, 140, 0, 0.05) 35%, transparent 60%);
+}
+
+.project-card-quiz::before {
+  background: linear-gradient(115deg, rgba(255, 215, 0, 0.07), rgba(255, 255, 255, 0.04) 45%, transparent 70%);
+}
+
+.project-card-publish::before {
+  background: linear-gradient(115deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.02) 40%, transparent 70%);
 }
 
 /* Scroll Indicator */
@@ -176,6 +277,16 @@ h2 {
   font-weight: normal;
 }
 
+.hero-section h2 {
+  font-size: 1.25rem;
+}
+
+.hero-role {
+  margin: 0.3rem 0 0 0;
+  color: #d8d8d8;
+  letter-spacing: 0.03rem;
+}
+
 /* Animation keyframes */
 @keyframes typing {
   from {
@@ -206,6 +317,7 @@ h2 {
   /* Relative positioning for child elements */
   width: 100%;
   max-width: 800px;
+  margin-top: 2.4rem;
 }
 
 a {
@@ -220,14 +332,19 @@ a {
   align-items: center;
 }
 
-/* Pseudo-element for underline effect, applied to the text only */
-a span {
+.project-card a,
+.projects-grid a {
+  align-items: stretch;
+}
+
+/* Pseudo-element for underline effect, applied to the social link text only */
+.social-links a span {
   position: relative;
   display: inline-block;
   /* Ensure the underline scales with the text */
 }
 
-a span::after {
+.social-links a span::after {
   content: '';
   position: absolute;
   left: 0;
@@ -248,34 +365,15 @@ a span::after {
   /* Place it behind the text */
 }
 
-a:hover span::after {
+.social-links a:hover span::after {
   transform: scaleX(1);
   /* Scale to full width on hover */
 }
 
-a:hover {
+.social-links a:hover {
   color: #FFD700;
   /* Change text color on hover */
 }
-
-/* Rainbow divider styling */
-.divider {
-  margin: 20px 0;
-  /* Space around the divider */
-  height: 4px;
-  /* Thickness of the divider */
-  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-  /* Rainbow colors */
-  width: 80%;
-  /* Centered width */
-  border: none;
-  margin-left: auto;
-  /* Center align */
-  margin-right: auto;
-  /* Center align */
-}
-
-/* Cleaned up unused list and synopsis styles */
 
 /* Icon for LinkedIn and GitHub */
 .icon {
@@ -291,6 +389,12 @@ a:hover {
   /* White circular background */
   padding: 5px;
   /* Padding for the circle */
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.social-links a:hover .icon {
+  background-color: #FFD700;
+  box-shadow: 0 0 0 1px rgba(255, 215, 0, 0.35), 0 0 14px rgba(255, 215, 0, 0.25);
 }
 
 .social-links {
@@ -298,4 +402,50 @@ a:hover {
   justify-content: center;
   gap: 20px;
   margin-bottom: 20px;
+}
+
+.rainbow-rail {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  opacity: 0.95;
+  z-index: 50;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .projects-section {
+    padding: 3rem 1rem 2.25rem;
+  }
+
+  .project-card {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    row-gap: 0.45rem;
+    min-height: 0;
+    padding: 0.85rem;
+  }
+
+  .project-card-top {
+    gap: 0.55rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.24rem;
+  }
+
+  .project-card p {
+    font-size: 1rem;
+  }
+
+  .hero-name {
+    font-size: 1.55rem;
+  }
+
+  .hero-role {
+    font-size: 1.05rem;
+  }
 }
