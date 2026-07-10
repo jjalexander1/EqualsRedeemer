@@ -1,0 +1,25 @@
+services:
+  equalsredeemer:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      INPLAY_USERNAME: ${INPLAY_USERNAME:-jja}
+      INPLAY_INITIAL_PASSWORD: ${INPLAY_INITIAL_PASSWORD:-password}
+      INPLAY_COOKIE_SECURE: ${INPLAY_COOKIE_SECURE:-true}
+      NOWGOAL_GCS_BUCKET: ${NOWGOAL_GCS_BUCKET:-}
+      NOWGOAL_GCS_PREFIX: ${NOWGOAL_GCS_PREFIX:-nowgoal-data}
+      FLASHSCORE_GCS_BUCKET: ${FLASHSCORE_GCS_BUCKET:-}
+      FLASHSCORE_GCS_PREFIX: ${FLASHSCORE_GCS_PREFIX:-flashscore-data}
+      GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS:-/run/secrets/gcp-service-account.json}
+      CACHE_DIR: /app/data/cache
+      INPLAY_DATA_DIR: /app/data
+    volumes:
+      - equalsredeemer_data:/app/data
+      - ${GCP_SERVICE_ACCOUNT_FILE:?Set GCP_SERVICE_ACCOUNT_FILE to your service account JSON path}:/run/secrets/gcp-service-account.json:ro
+
+volumes:
+  equalsredeemer_data:

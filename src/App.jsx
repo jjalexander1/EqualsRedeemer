@@ -1,104 +1,138 @@
-import { useRef } from 'react'
+import { useEffect, useState } from 'react'
 import './index.css'
+import { InplayApp } from './inplay/InplayApp'
 
-function App() {
-  const projectsRef = useRef(null);
+const PROJECTS = [
+  {
+    title: 'FastQuiz',
+    synopsis: 'Free-to-use application for hosting and playing fast pub quizzes.',
+    url: 'https://fastquiz.equalsredeemer.com',
+    category: 'Web App',
+    status: 'Live',
+  },
+  {
+    title: 'QLL Website',
+    synopsis: 'Full rewrite of the historic Quiz League of London website and stats platform.',
+    url: 'https://quizleague.london',
+    category: 'Website',
+    status: 'In progress',
+  },
+  {
+    title: 'Highlight Translator',
+    synopsis: 'Chrome extension for instant translation of highlighted text.',
+    url: 'https://chromewebstore.google.com/detail/highlight-translator/cjlajekojgiipcikahogchndkbmiekon?pli=1',
+    category: 'Browser Extension',
+    status: 'Live',
+  },
+  {
+    title: 'Friday Buzzer',
+    synopsis: 'WebSockets app for hosting and playing buzzer quizzes.',
+    url: 'https://buzzer.equalsredeemer.com',
+    category: 'Web App',
+    status: 'Live',
+  },
+]
 
-  const projects = [
-    {
-      title: 'Highlight Translator',
-      synopsis: 'Chrome extension for instant highlighted-text translation.',
-      url: 'https://chromewebstore.google.com/detail/highlight-translator/cjlajekojgiipcikahogchndkbmiekon?pli=1',
-      category: 'Chrome Extension',
-      accent: 'publish'
-    },
-    {
-      title: 'Fast Quiz',
-      synopsis: 'Live quiz hosting with realtime rounds and scoreboards.',
-      url: 'https://fastquiz.equalsredeemer.com',
-      category: 'WebSocket App',
-      accent: 'realtime'
-    },
-    {
-      title: 'Buzzer',
-      synopsis: 'WebSocket buzzer rooms with response timing for quiz nights.',
-      url: 'https://buzzer.equalsredeemer.com',
-      category: 'WebSocket App',
-      accent: 'quiz'
-    },
-    {
-      title: 'Quiz League of London website',
-      synopsis: 'Full rewrite of the historic Quiz League of London website and stats platform, coming soon.',
-      url: 'https://quizleague.london',
-      category: 'Website Rewrite',
-      accent: 'publish'
-    }
-  ];
+function PortfolioHome() {
+  const linkedinUrl = 'https://www.linkedin.com/in/jack-a-5290b1b4/'
+  const githubUrl = 'https://github.com/jjalexander1'
+  const title = '=REDEEMER'
+  const [typedTitle, setTypedTitle] = useState('')
 
-  const linkedinUrl = "https://www.linkedin.com/in/jack-a-5290b1b4/";
-  const githubUrl = "https://github.com/jjalexander1";
+  useEffect(() => {
+    let index = 0
 
-  const scrollToProjects = () => {
-    projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+    const interval = window.setInterval(() => {
+      index += 1
+      setTypedTitle(title.slice(0, index))
+
+      if (index >= title.length) {
+        window.clearInterval(interval)
+      }
+    }, 95)
+
+    return () => window.clearInterval(interval)
+  }, [])
 
   return (
-    <>
-      {/* Hero Section */}
-      <section className="hero-section">
-        <h1 className="typing-container" id="title">=REDEEMER</h1>
-        <div className="hero-identity">
-          <p className="hero-name">Jack Alexander</p>
-          <h2 id="subtitle" className="hero-role">Senior Software Engineer</h2>
-        </div>
+    <main className="site-shell">
+      <section className="intro-section" aria-label="EqualsRedeemer introduction">
+        <div className="intro-inner">
+          <h1 aria-label={title}>
+            <span className="typed-title">{typedTitle}</span>
+            <span className="typing-cursor" aria-hidden="true">
+              |
+            </span>
+          </h1>
+          <p className="intro-name">Jack Alexander</p>
+          <p className="intro-role">Senior Software Engineer</p>
 
-        <div className="content">
-          <div className="social-links">
+          <div className="intro-links">
             <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
-              <img src="/linkedin-logo.png" alt="LinkedIn" className="icon" /> <span>LinkedIn</span>
+              <img src="/linkedin-logo.png" alt="" aria-hidden="true" className="icon" />
             </a>
-            <span style={{ color: '#fff', fontSize: '1.5rem' }}>|</span>
             <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-              <img src="/github-logo.png" alt="GitHub" className="icon" /> <span>GitHub</span>
+              <img src="/github-logo.png" alt="" aria-hidden="true" className="icon" />
             </a>
           </div>
         </div>
 
-        <div className="scroll-indicator" onClick={scrollToProjects}>
-          <span>View Work</span>
-          <div className="arrow-down"></div>
-        </div>
+        <a className="scroll-link" href="#projects" aria-label="Scroll to projects">
+          ↓
+        </a>
       </section>
 
-      {/* Projects Section */}
-      <section className="projects-section" ref={projectsRef}>
-        <div className="projects-header">
-          <h2 className="projects-title">Things I’ve Built</h2>
-          <p className="projects-intro">Web apps, sites and tools.</p>
-        </div>
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <a
-              key={index}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`project-card project-card-${project.accent}`}
-            >
-              <div className="project-card-top">
-                <span className="project-category">{project.category}</span>
-              </div>
-              <div className="project-card-body">
-                <h3>{project.title}</h3>
-                <p>{project.synopsis}</p>
-              </div>
-            </a>
-          ))}
+      <section className="projects-section" id="projects" aria-label="Personal projects">
+        <div className="projects-inner">
+          <div className="projects-header">
+            <p className="eyebrow eyebrow--light">Personal projects</p>
+            <h2>Selected work</h2>
+            <p className="projects-intro">
+              Outside of my work with{' '}
+              <a href="https://eit.org/" target="_blank" rel="noopener noreferrer">
+                Ellison Institute of Technology
+              </a>
+              , here are some of the personal projects I&apos;ve built recently.
+            </p>
+          </div>
+
+          <div className="projects-grid">
+            {PROJECTS.map((project) => (
+              <a
+                key={project.title}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-card"
+              >
+                <div className="project-card__meta">
+                  <span>{project.category}</span>
+                  <span>{project.status}</span>
+                </div>
+
+                <div className="project-card__body">
+                  <h3>{project.title}</h3>
+                  <p>{project.synopsis}</p>
+                </div>
+
+                <div className="project-card__footer">
+                  <span aria-hidden="true">↗</span>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
-      <div className="rainbow-rail" aria-hidden="true" />
-    </>
+    </main>
   )
+}
+
+function App() {
+  if (window.location.pathname.startsWith('/inplay')) {
+    return <InplayApp />
+  }
+
+  return <PortfolioHome />
 }
 
 export default App
